@@ -1,5 +1,4 @@
 from twython import Twython, TwythonRateLimitError
-import pickle
 import csv
 from googletrans import Translator
 from termcolor import colored,cprint
@@ -32,7 +31,7 @@ posts = []
 translated = []
 translator = Translator()
 
-TEST_LIMIT = None#queries por id
+TEST_LIMIT = 10#queries por id
 TIME_LIMIT = 900#segundos
 
 
@@ -88,6 +87,3 @@ for i,post in enumerate(read):
         
         else:
             cprint(colored(e,'white','on_red'))
-
-with open('parrot.pkl', 'wb') as f:
-    pickle.dump(total_posts, f)

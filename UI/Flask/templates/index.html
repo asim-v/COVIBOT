@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block table %}
+    {% for e in names %}
+        <tr>
+            <td>{{e.name}}</td>
+            <td>{{e.desc}}</td>
+            <td>{{e.category}}</td>
+            <td>{{e.priority}}</td>
+            <td>{{e.date}}</td>
+        </tr>
+    {% endfor %}    
+{% endblock %}

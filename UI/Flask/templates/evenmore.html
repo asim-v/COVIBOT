@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+    Second Page
+{% endblock %}
+
+{% block body %}
+<p>Some spetial content for the second page</p>
+
+
+<form action="{{url_for('alan')}}" method="post">
+    <input type="text" name="note" placeholder="Enter Note Here">
+    <button>Add Note</button>
+</form> 
+
+
+<ul>
+    {% for note in notes %}
+        <li>{{ note }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

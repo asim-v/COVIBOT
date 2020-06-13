@@ -21,19 +21,7 @@ st.write('{} tweets hasta ahora'.format(len(data)))
 cols = ["Urgencia", "Contenido", "Categoria"]
 st_ms = st.multiselect("Columns", df.columns.tolist(), default=cols)
 	
-def ColorPill(val):
-	if val == 'Salud':
-		return 'background-color:red'
-	if val == 'Información Oficial':
-		return 'background-color:green'
-	if val == 'Ocio':
-		return 'background-color:yellow'
-	if val == 'Laborales':
-		return 'background-color:blue'
-	if val == 'Educación':
-		return 'background-color:orange'
-
-st.dataframe(df.style.applymap(ColorPill))
+st.dataframe(df)
 
 # if dist_key == 'Normal':
 #     nums = np.random.randn(1000)

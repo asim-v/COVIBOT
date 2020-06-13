@@ -3,13 +3,18 @@ import csv
 from langdetect import detect
 from termcolor import colored,cprint
 import time
-import fireo
-from fireo.models import Model,TextField,NumberField
 import random
 
+
+
+
+import fireo
+from fireo.models import Model,TextField,NumberField
 #solo para hacer pruebas locales, en cgloud se autentifica automáticamente
 fireo.connection(from_file="keyfile.json")
 #solo para hacer pruebas locales, en cgloud se autentifica automáticamente
+
+
 
 
 class Post(Model):

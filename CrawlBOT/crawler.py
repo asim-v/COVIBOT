@@ -10,6 +10,7 @@ from tweepy import API
 import os.path
 # Another imports to parse the json
 import json
+from urllib3.exceptions import ProtocolError
 
 
 #Conexión a la BD.
@@ -213,21 +214,6 @@ class MyStreamListener(StreamListener):
             # Create the tweet object with the info we need and return the json
             Tweet = myTweet(parsed).serialize()
             db.child("extraction").push(Tweet)
-            
-
-            # Object to write a dictionary on a csv
-            dictWriter = csv.DictWriter(
-                FILE_MINING, fieldnames=Tweet.keys(), delimiter=',', lineterminator='\n')
-
-            # If the file did not exists
-            if not FILE_EXISTS:
-                # Writes the headers
-                dictWriter.writeheader()
-                FILE_EXISTS = True
-
-            # Write the dict on the file
-            dictWriter.writerow(Tweet)
-
             # Plus one to the counter
             TWEETS_COUNT += 1
 
@@ -262,31 +248,19 @@ if __name__ == '__main__':
 
     print("====== Running App ======")
     try:
-        # Start to the listen tweets
+    # Start to the listen tweets
         auth = Get_Authentication()
         
         #Se conecta a la api de twitter para extraer con la ventana de 15 minutos
         api = API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True, retry_count=10, retry_delay=5, retry_errors=5)
-        
-        myStreamListener = MyStreamListener()
-        myStream = Stream(api.auth, myStreamListener)
-        
-
-
-        
-        # Check if the CSV file already exits
-        if os.path.exists('TweetsExtract'+ filename +'.csv'):
-            FILE_EXISTS = True
-
-        # Open the file where the tweets are going to be write
-        FILE_MINING = open('TweetsExtract'+ filename +'.csv', 'a+',
-                           encoding='UTF-8', newline='')
-
-        print("\n>> Listening tweets")
-
-        # Filter the tweets by language (spanish) and the keywords
-        myStream.filter(languages=["es"], track=keyWords, stall_warnings=True,locations=location)
-
+        while True:            
+            try:
+                myStreamListener = MyStreamListener()
+                myStream = Stream(api.auth, myStreamListener)        
+                print("\n>> Listening tweets")
+                myStream.filter(languages=["es"], track=keyWords, stall_warnings=True,locations=location)
+            except (ProtocolError, AttributeError):
+                continue
     # To stop the program
     except KeyboardInterrupt:
         FILE_MINING.close()

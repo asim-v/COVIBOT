@@ -1,24 +1,20 @@
-from fireo.models import Model
-from fireo.fields import TextField,NumberField
 from flask import Flask, render_template
+from flask_session import Session
+import pyrebase
 
-#solo para hacer pruebas
-import os
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "keyfile.json"
-#solo para hacer pruebas
+config = {
+  "apiKey": "AIzaSyDVpxOSaZH08jzKvQJhssW06sloEHz5voc",
+  "authDomain": "colabotz.firebaseapp.com",
+  "databaseURL": "https://colabotz.firebaseio.com",
+  "storageBucket": "colabotz.appspot.com",
+  "serviceAccount": "keyfile.json"
+}
+firebase = pyrebase.initialize_app(config)
 
-
-class Post(Model):
-    content = TextField()
-    urgency = NumberField()
-    category = TextField()
-
-
-posts = Post.collection.fetch()
+db = firebase.database()
+db.child("colabotz").child("extraction")
 
 app = Flask(__name__)
 @app.route('/')
 def index():
-    return render_template("index.html",error = 0,posts = posts)
-
-user = Post.collection.delete()
+    return render_template("index.html",error = 0)

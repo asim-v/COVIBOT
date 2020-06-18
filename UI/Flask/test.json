@@ -1,0 +1,10 @@
+data = {
+    "users/"+ref.generate_key(): {
+        "name": "Mortimer 'Morty' Smith"
+    },
+    "users/"+ref.generate_key(): {
+        "name": "Rick Sanchez"
+    }
+}
+
+db.update(data)

@@ -23,7 +23,6 @@ config = {
 }
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
-db.child("extraction").child("corpus")
 
 
 CON_KEY = "CkulBfQE91jOJBNIuMb1TUbWt"
@@ -169,8 +168,7 @@ class myTweet():
 
 #AUTENTICACION
 
-# Variable to store the pointer to the CSV file
-FILE_MINING = None
+
 # Variable to know if the output file already exists or not
 FILE_EXISTS = False
 # Variable to count how many tweets were mined
@@ -205,7 +203,6 @@ class MyStreamListener(StreamListener):
         try:
             # Get the global variables
             global FILE_EXISTS
-            global FILE_MINING
             global TWEETS_COUNT
 
             # Loads the tweet object
@@ -213,7 +210,12 @@ class MyStreamListener(StreamListener):
 
             # Create the tweet object with the info we need and return the json
             Tweet = myTweet(parsed).serialize()
+            #SAVES DATA
+            
+            #UPDATES DB STATE
             db.child("extraction").push(Tweet)
+            StrNum = str(int(db.child("status").child("count").get().val())+1)
+            db.child("status").update({"count":StrNum})
             # Plus one to the counter
             TWEETS_COUNT += 1
 
@@ -252,7 +254,7 @@ if __name__ == '__main__':
         auth = Get_Authentication()
         
         #Se conecta a la api de twitter para extraer con la ventana de 15 minutos
-        api = API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True, retry_count=10, retry_delay=5, retry_errors=5)
+        api = API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True, retry_delay=5, retry_errors=5)
         while True:            
             try:
                 myStreamListener = MyStreamListener()
@@ -263,13 +265,11 @@ if __name__ == '__main__':
                 continue
     # To stop the program
     except KeyboardInterrupt:
-        FILE_MINING.close()
         print("\n\n>> Mining finished.")
         print(str(TWEETS_COUNT) +
-              " tweets were written in the TweetsExtract"+ filename + ".csv file")
+              " tweets were written")
     except Exception as err:
         # Print if there is an error
-        FILE_MINING.close()
         print("\n\n>> Mining finished.")
         print(str(TWEETS_COUNT) +
               " tweets were written in the TweetsExtract.csv file")

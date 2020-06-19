@@ -3,11 +3,9 @@
 {% block table %}
     {% for e in posts %}
         <tr>
-            <td>{{e.name}}</td>
-            <td>{{e.desc}}</td>
-            <td>{{e.category}}</td>
-            <td>{{e.priority}}</td>
-            <td>{{e.date}}</td>
+            <td>{{e.rt_OgRetwCount}}</td>
+            <td>{{e.tw_text}}</td>
+            <td>{{e.usr_name}}</td>
         </tr>
     {% endfor %}    
 {% endblock %}

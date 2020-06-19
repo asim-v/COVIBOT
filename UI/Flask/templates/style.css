@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
 body {
     font-family: 'IBM Plex Sans', sans-serif;
+    zoom: 110;
 }
 h1{
 	font-weight: 700;
@@ -24,8 +25,8 @@ hr {
 }
 .container {
     flex: 1 1;
-    max-width: 730px;
+    max-width: 850px;
     width: 100%;
-    padding: 5rem 1rem 10rem;    
+    padding: 4rem 1rem 10rem;    
     box-sizing: border-box;
 }

@@ -44,19 +44,267 @@
     background-image: -webkit-linear-gradient(left, #f63366, #fffd80);
     background-image: linear-gradient(90deg, #f63366, #fffd80);
     z-index: 120;
+    }
+
+@-webkit-keyframes slideInLeft {
+  0% {
+    -webkit-transform: translate3d(-250px, 0, 0);
+            transform: translate3d(-250px, 0, 0);
+    visibility: visible;
+  }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+  }
 }
+@keyframes slideInLeft {
+  0% {
+    -webkit-transform: translate3d(-250px, 0, 0);
+            transform: translate3d(-250px, 0, 0);
+    visibility: visible;
+  }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+  }
+}
+@-webkit-keyframes slideOutLeft {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+  }
+  100% {
+    -webkit-transform: translate3d(-250px, 0, 0);
+            transform: translate3d(-250px, 0, 0);
+    visibility: hidden;
+  }
+}
+@keyframes slideOutLeft {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+  }
+  100% {
+    -webkit-transform: translate3d(-250px, 0, 0);
+            transform: translate3d(-250px, 0, 0);
+    visibility: hidden;
+  }
+}
+* {
+  box-sizing: border-box;
+}
+
+body:after {
+  background: white;
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  overflow: auto;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  width: 100%;
+}
+body.open {
+  overflow: hidden;
+}
+body.open:after {
+  opacity: 1;
+  visibility: visible;
+}
+
+.b-nav {
+  position: absolute;
+  z-index: 11;
+}
+.b-nav:not(.open) {
+  visibility: hidden;
+}
+.b-nav li {
+  color: #2B2B2B;
+  list-style-type: none;
+  padding: 10px;
+  text-align: left;
+  -webkit-transform: translateX(-250px);
+          transform: translateX(-250px);
+}
+.b-nav li:not(.open) {
+  -webkit-animation-duration: 0.4s;
+          animation-duration: 0.4s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-name: slideOutLeft;
+          animation-name: slideOutLeft;
+}
+.b-nav li:first-child {
+  padding-top: 120px;
+}
+.b-nav.open {
+  visibility: visible;
+}
+.b-nav.open li {
+  -webkit-animation-duration: 0.4s;
+          animation-duration: 0.4s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-name: slideInLeft;
+          animation-name: slideInLeft;
+}
+
+.b-link {
+  background: transparent;
+  color: #2B2B2B;
+  font-size: 24px;
+  font-weight: 300;
+  margin-left: 30px;
+  text-decoration: none;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  width: auto;
+}
+.b-link:hover, .b-link--active {
+  padding-left: 10px;
+  color: #f63366;
+}
+
+.b-menu {
+  background: white;
+  border: white solid 2px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: inline-block;
+  height: 60px;
+  padding-left: 15.5px;
+  padding-top: 17.5px;
+  position: relative;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  width: 60px;
+  z-index: 12;
+}
+.b-menu:hover {
+  box-shadow:5px 5px 500px;
+}
+
+.b-bun {
+  background: #c4c4c4;
+  position: relative;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+.b-bun--top {
+  border-radius: 10px;
+  height: 3px;
+  top: 0;
+  width: 25px;
+}
+.b-bun--mid {
+  border-radius: 10px;
+  height: 3px;
+  top: 6px;
+  width: 25px;
+}
+.b-bun--bottom {
+  border-radius: 10px;
+  height: 3px;
+  top: 12px;
+  width: 25px;
+}
+
+.b-brand {
+  color: white;
+  font-size: 24px;
+  font-weight: 300;
+  margin-left: 30px;
+  position: relative;
+  text-decoration: none;
+  top: -21.4285714286px;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+.b-container {
+  height: 60px;
+  left: 30px;
+  position: absolute;
+  top: 30px;
+}
+.b-container:hover:not(.open) .bun-top,
+.b-container:hover:not(.open) .bun-mid,
+.b-container:hover:not(.open) .bun-bottom {
+  background: white;
+}
+.b-container.open .b-main {
+  border: #2B2B2B solid 2px;
+}
+.b-container.open .b-bun--top {
+  background: #2B2B2B;
+  top: 9px;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+.b-container.open .b-bun--mid {
+  opacity: 0;
+}
+.b-container.open .b-bun--bottom {
+  background: #2B2B2B;
+  top: 5px;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+.b-container.open .b-brand {
+  color: #2B2B2B;
+}
+
 </style>
+
+<!-- Navigation -->
+<div class="b-nav">
+  <li><a class="b-link" href="{{url_for('logout')}}" href="https://dribbble.com/mblode" target="_blank">Cerrar Sesión</a></li>
+</div>
+<!-- Burger-Icon -->
+<div class="b-container">
+  <div class="b-menu">
+    <div class="b-bun b-bun--top"></div>
+    <div class="b-bun b-bun--mid"></div>
+    <div class="b-bun b-bun--bottom"></div>
+  </div>
+  <!-- Burger-Brand 
+  <a href="#" class="b-brand">Menu</a>-->
+</div>
+<body id="dataGrid" >
 <header class="decoration"></header>
 </head>
 <br><br>
-<body id="dataGrid" >
+
+
+<script type="text/javascript">
+(function() {
+  var body = document.body;
+  var burgerMenu = document.getElementsByClassName('b-menu')[0];
+  var burgerContain = document.getElementsByClassName('b-container')[0];
+  var burgerNav = document.getElementsByClassName('b-nav')[0];
+
+  burgerMenu.addEventListener('click', function toggleClasses() {
+    [body, burgerContain, burgerNav].forEach(function (el) {
+      el.classList.toggle('open');
+    });
+  }, false);
+})();
+</script>
 
 	<div class="ui page grid container" style="margin-top: 5em;">
 		<div class="ui one column grid">			
         <div class="table" style="padding-left:0rem;">
         		<div class="row">
             		<div class="col-sm-8" >
-                		<h1 style="font-family: 'IBM Plex Sans', sans-serif;font-size: 2.8rem;font-weight: 700">🧼 COVIBOT 🦠</h1>
+                		<h1 style="font-family: 'IBM Plex Sans', sans-serif;font-size: 2.8rem;font-weight: 700">COVIBOT 🦠</h1>
             		</div>
             		<div class="col-sm">
                         <div class="row">

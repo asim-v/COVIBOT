@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="ie=edge"><title>Omega - Landing Page Template</title><link rel="shortcut icon" href="favicons/png-favicon.png" type="image/x-icon"><!-- Bootstrap , fonts & icons  --><link rel="stylesheet" href="css/css-bootstrap.min.css"><link rel="stylesheet" href="css/css-style.css"><link rel="stylesheet" href="css/typography-font-typo.css"><link rel="stylesheet" href="css/css-all.css"><!-- Plugin'stylesheets  --><link rel="stylesheet" href="css/aos-aos.min.css"><link rel="stylesheet" href="css/fancybox-jquery.fancybox.min.css"><link rel="stylesheet" href="css/nice-select-nice-select.css"><link rel="stylesheet" href="css/slick-slick.css"><!-- Vendor stylesheets  --><link rel="stylesheet" href="css/css-settings.css"><link rel="stylesheet" href="css/css-main.css"><!-- Custom stylesheet --><link rel="stylesheet" href="css/css-custom.css"></head><body>
+  <div class="site-wrapper overflow-hidden">
+    <div class="sign-page sign-in-img bg-img">
+      <div class="site-wrapper contact-wrapper">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-7 col-xl-6">
+              <div class="brand text-center pt--40">
+                <a href="{{url_for('index')}}">
+                  <img src="images/png-logo-white.png" alt="" style="max-width: 150px;"></a>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-lg-7 col-xl-6">
+              <div class="main-block text-center">
+                <div class="omega-form">
+                  <form method="post">
+                    <div class="form-title mb--35">
+                      <h2 class="title">Ingresar</h2>
+                      <p>Ingresa los detalles de tu cuenta</p>
+                    </div>
+                    <div class="form-group">
+                      <p><input type=text name=email class="form-control" placeholder="Email"></div></p>
+                    <div class="form-group forget-block">
+                      <p><input type=text name=password class="form-control" placeholder="Contraseña"></p>
+                      <a class="forget-link" href="{{url_for('forgot')}}">Olvidaste tu contraseña?</a>
+                    </div>
+                    <div class="form-group form-check-label">
+                      <label for="tarms-check">
+                        <input class="d-none" type="checkbox" id="tarms-check"><span class="checkbox"></span>
+                        <p>Mantenerme Ingresado?</p>
+                      </label>
+                    </div>
+                    <div class="form-group button-block">
+                      <button type=submit value=Login class="form-btn">Iniciar</button>
+                      <p class="sign-up-text">No tienes una cuenta? <a href="{{url_for('signup')}}">Crea una gratis</a></p>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Vendor Scripts -->
+  <script src="js/jquery-jquery.min.js"></script><script src="js/jquery-jquery-migrate.min.js"></script><script src="js/js-bootstrap.bundle.min.js"></script><!-- Plugin's Scripts --><script src="js/fancybox-jquery.fancybox.min.js"></script><script src="js/nice-select-jquery.nice-select.min.js"></script><script src="js/aos-aos.min.js"></script><script src="js/slick-slick.min.js"></script><!-- Activation Script --><script src="js/6056-js-custom.js"></script></body></html>

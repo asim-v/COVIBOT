@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, session 
+from flask import Flask, render_template, request, session , redirect, url_for,send_from_directory
+from markupsafe import escape
 from flask_session import Session
 import json
 import firebase_admin 
@@ -28,6 +29,21 @@ cred = credentials.Certificate('keyfile.json')
 firebase_admin.initialize_app(cred,{"databaseURL":"https://colabotz.firebaseio.com"})
 # LOCAL AUTH 
 
+##STATIC
+@app.route('/js/<path:path>')
+def send_js(path):
+    return send_from_directory('static/js', path)
+@app.route('/images/<path:path>')
+def send_img(path):
+    return send_from_directory('static/images', path)
+@app.route('/css/<path:path>')
+def send_css(path):
+    return send_from_directory('static/css', path)
+@app.route('/fonts/<path:path>')
+def send_fonts(path):
+    return send_from_directory('static/fonts', path)
+
+
 def GetPosts(sortby = 'rt_OgRetwCount',limit=20):       
     
     # Importa database module.    
@@ -45,10 +61,40 @@ def GetPosts(sortby = 'rt_OgRetwCount',limit=20):
         total_posts.append(json2obj(snapshot[post]))
     return (total_posts[::-1],snapshot) #Obtiene la lista de objetos y el json
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        session['email'] = request.form['email']
+        session['password'] = request.form['password']
+        return redirect(url_for('dashboard'))
+    # return '''
+    #     <form method="post">
+    #         <p><input type=text name=email></p>
+    #         <p><input type=text name=password></p>
+    #         <p><input type=submit value=Login></p>
+    #     </form>
+    # '''
+    return render_template('sign-in-img.html')
+
+@app.route('/logout')
+def logout():
+    # remove the username from the session if it's there
+    session.pop('username', None)
+    return redirect(url_for('index'))
 
 @app.route('/')
 def index():
-	return render_template('landing.html')
+    if 'username' in session:
+        return redirect(url_for('dashboard'))
+    return render_template('landing.html')
+
+@app.route('/signup')
+def signup():
+    return render_template('sign-up-img.html')
+
+@app.route('/forgot')
+def forgot():
+    return render_template('forget-pass-img.html')
 
 
 @app.route("/dashboard", methods=["GET","POST"])
@@ -60,3 +106,6 @@ def dashboard():
     #     session["notes"].append(note)#Only append the note to the specific session
         
     return render_template("index.html",posts=GetPosts()[0])
+
+
+

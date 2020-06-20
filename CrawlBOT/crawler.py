@@ -1,5 +1,4 @@
 import csv
-import pyrebase
 
 # Imports from the Tweepy API
 from tweepy.streaming import StreamListener
@@ -14,6 +13,7 @@ from urllib3.exceptions import ProtocolError
 
 
 #Conexión a la BD.
+import pyrebase
 config = {
   "apiKey": "AIzaSyDVpxOSaZH08jzKvQJhssW06sloEHz5voc",
   "authDomain": "colabotz.firebaseapp.com",
@@ -166,7 +166,19 @@ class myTweet():
 
 
 
-#AUTENTICACION
+#IsTopic
+def IsTopic(text):
+	# Save Model Using Pickle
+	import pandas
+	from sklearn import model_selection
+	from sklearn.linear_model import LogisticRegression
+	import pickle
+	import numpy as np
+	# load the model from disk
+	loaded_model = pickle.load(open('engine.sav', 'rb'))
+	return loaded_model.score([text],['EnTopico'])
+
+
 
 
 # Variable to know if the output file already exists or not
@@ -211,20 +223,19 @@ class MyStreamListener(StreamListener):
             # Create the tweet object with the info we need and return the json
             Tweet = myTweet(parsed).serialize()
             #SAVES DATA
-            
-            #UPDATES DB STATE
-            db.child("extraction").push(Tweet)
-            StrNum = str(int(db.child("status").child("count").get().val())+1)
-            db.child("status").update({"count":StrNum})
-            # Plus one to the counter
-            TWEETS_COUNT += 1
+            if IsTopic(Tweet['tw_text']):
+                #UPDATES DB STATE
+                db.child("extraction").push(Tweet)
+                StrNum = str(int(db.child("status").child("count").get().val())+1)
+                db.child("status").update({"count":StrNum})
+                # Plus one to the counter
+                TWEETS_COUNT += 1
 
             # Print in the terminal
             if TWEETS_COUNT % 30 == 0:
                 print('.')
             else:
                 print('.', end=' ')
-
             return True
 
         except BaseException as e:

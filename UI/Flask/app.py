@@ -42,9 +42,13 @@ def send_css(path):
 @app.route('/fonts/<path:path>')
 def send_fonts(path):
     return send_from_directory('static/fonts', path)
+@app.route('/favicons/<path:path>')
+def send_icons(path):
+    return send_from_directory('static/favicons', path)
 
 
-def GetPosts(sortby = 'rt_OgRetwCount',limit=20):       
+
+def GetPosts(sortby = 'rt_OgRetwCount',limit=1000):       
     
     # Importa database module.    
     ref = db.reference('extraction') #Establece ref a grupo de posts
@@ -58,7 +62,8 @@ def GetPosts(sortby = 'rt_OgRetwCount',limit=20):
         return json.loads(data, object_hook=_json_object_hook)
     for post in snapshot:
         #print(json.dumps(snapshot[post], indent=4, sort_keys=True))    #PrettyPrint
-        total_posts.append(json2obj(snapshot[post]))
+        try:total_posts.append(json2obj(snapshot[post]))
+        except:pass
     return (total_posts[::-1],snapshot) #Obtiene la lista de objetos y el json
 
 @app.route('/login', methods=['GET', 'POST'])

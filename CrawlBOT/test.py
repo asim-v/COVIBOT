@@ -12,4 +12,4 @@ def GetScore(text):
 	print(loaded_model)
 	return loaded_model.score([text],['EnTopico'])
 
-print(GetScore('queremos ir de peda'))
+print(GetScore('no hagamos nada'))

@@ -7,7 +7,7 @@
           <div class="row justify-content-center">
             <div class="col-lg-7 col-xl-6">
               <div class="brand text-center pt--40">
-                <a href="{{url_for('index')}}">
+                <a href="{{url_for('index_page')}}">
                   <img src="images/png-logo-white.png" alt="" style="max-width: 150px;"></a>
               </div>
             </div>
@@ -16,7 +16,7 @@
             <div class="col-lg-7 col-xl-6">
               <div class="main-block text-center">
                 <div class="omega-form">
-                  <form method="post">
+                  <form method="POST" action="{{ url_for('user_login') }}">
                     <div class="form-title mb--35">
                       <h2 class="title">Ingresar</h2>
                       <p>Ingresa los detalles de tu cuenta</p>
@@ -24,7 +24,7 @@
                     <div class="form-group">
                       <p><input type=text name=email class="form-control" placeholder="Email"></div></p>
                     <div class="form-group forget-block">
-                      <p><input type=text name=password class="form-control" placeholder="Contraseña"></p>
+                      <p><input type=password name=password class="form-control" placeholder="Contraseña"></p>
                       <a class="forget-link" href="{{url_for('forgot')}}">Olvidaste tu contraseña?</a>
                     </div>
                     <div class="form-group form-check-label">
@@ -35,7 +35,7 @@
                     </div>
                     <div class="form-group button-block">
                       <button type=submit value=Login class="form-btn">Iniciar</button>
-                      <p class="sign-up-text">No tienes una cuenta? <a href="{{url_for('signup')}}">Crea una gratis</a></p>
+                      <p class="sign-up-text">No tienes una cuenta? <a href="{{url_for('user_register')}}">Crea una gratis</a></p>
                     </div>
                   </form>
                 </div>

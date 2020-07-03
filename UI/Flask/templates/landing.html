@@ -7,13 +7,14 @@
     <div class="landing-2">
       <!-- Header Area -->
       <header class="site-header bg--conflower-blue sticky-header"><div class="container-fluid pr-lg--30 pl-lg--30">
-          <nav class="navbar site-navbar offcanvas-active navbar-expand-lg navbar-light"><!-- Brand Logo--><div class="brand-logo mr--30"><a href="javascript:.html"><img src="images/png-logo-white.png" alt=""></a></div>
+          <nav class="navbar site-navbar offcanvas-active navbar-expand-lg navbar-light"><!-- Brand Logo--><div class="brand-logo mr--30"><a href="javascript:.html"><img src="images/png-logo-white.png" alt=""></a>
+          </div>
             <div class="collapse navbar-collapse" id="mobile-menu">
               <div class="navbar-nav mr--10 ml-lg-auto">
                 <ul class="navbar-nav main-menu">
                   <li class="nav-item">
                     <button class="btn--primary hvr-bounce-to-left" 
-                    onclick="window.location.href='{{ url_for('login') }}'">Iniciar Sesión</button>
+                    onclick="window.location.href='{{ url_for('user_login') }}'">Iniciar Sesión</button>
                   </li>
                 </ul></div>
             </div>
@@ -38,7 +39,7 @@
                 <h1 class="title">Encuentra y ofrece ayuda automáticamente.</h1>
                 <p>COVIBOT es un sistema que está analizando los tweets en tiempo real para identificar los posts más relevantes, ingresa a verlos.</p>
                     <button class="btn--primary hvr-bounce-to-left"  style="left: 0;" 
-                    onclick="window.location.href='{{ url_for('login') }}'">Vamos!</button>
+                    onclick="window.location.href='{{ url_for('user_register') }}'">Registrarse!</button>
               </div>
             </div>
           </div>

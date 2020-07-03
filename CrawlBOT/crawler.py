@@ -247,7 +247,7 @@ class MyStreamListener(StreamListener):
 if __name__ == '__main__':
 
     keyWords = ['guantes','cubrebocas','cofias', 'lentes' , 'clínicas','seguro social',
-                'alimentos no perecederos', 'botiquín médico','doctora', 'enfermero','mircroempresas','sobrevivir a la cuarentena',
+                'botiquín médico','doctora', 'enfermero','mircroempresas','sobrevivir a la cuarentena',
                 'personal de salud','centro de acopio','adultos mayores','situacion vulnerable', 'salud mental', 'nutricion','resilencia',
                 'acompañamiento','psicosocial','confinamiento en casa','tercera edad','mantenerte seguro',
                 'test', 'apoyo', 'ayuda en casa','voluntatio','salud','caretas',
@@ -272,7 +272,7 @@ if __name__ == '__main__':
                 myStream = Stream(api.auth, myStreamListener)        
                 print("\n>> Listening tweets")
                 myStream.filter(languages=["es"], track=keyWords, stall_warnings=True,locations=location)
-            except (ProtocolError, AttributeError):
+            except:
                 continue
     # To stop the program
     except KeyboardInterrupt:

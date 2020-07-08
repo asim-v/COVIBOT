@@ -1,67 +1,78 @@
 {% extends "header.html" %}
 {% block body %}
+<body id="DataGrid">
+  <div class="container-fluid">
+    <div class="row">      
+      <div class="col-sm-6">
+        {% block map %}
+        {% endblock %}
+      </div>      
+      <div class="col-sm-6">
+        <div class="container-fluid" >
+          <div class="ui table grid" style="margin-top: 1em;">
+            <div class="ui one column grid">      
+                <div class="table">
 
-	<div class="ui page grid container" style="margin-top: 5em;">
-		<div class="ui one column grid">			
-        <div class="table" style="padding-left:0rem;">
-        		<div class="row">
-            		<div class="col-sm-8" >
-                		<h1 style="font-family: 'IBM Plex Sans', sans-serif;font-size: 2.8rem;font-weight: 700">COVIBOT 🦠</h1>
-            		</div>
-            		<div class="col-sm">
-                        <div class="row">
+                    <div class="row">
+                        <div class="col-sm-8" >
+                            <h1>COVIBOT 🦠</h1>
+                        </div>
+                        <div class="col-sm">
                             {% if error %}  
-                                <div class="ui red message" style="box-shadow: none;max-width:250px;float:right">
+                                <div class="ui red message custom-alert" >
                                     Error: {{ error }}
                                 </div>            
                             {% else %} 
-                                <div id="Counter" class="ui green message" style="box-shadow: none;max-width:250px;float:right;left: 15px">
+                                <div id="Counter" class="ui green message custom-flag">
                                     Conexión establecida
                                 </div>
                             {% endif %} 
                         </div>
-            		</div>
-            		
-        		</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <h5>  COVIBOT está buscando los posts más urgentes automáticamente en twitter</h5>
+                      </div>
+                    </div>
+
+
+                    
+
+
+                    <table id="posts" class="table_class ">
+                      <thead>
+                        <tr>
+                          <th>Urgencia</th>
+                          <th>Status</th>
+                          <th>Notes</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% block table %}
+                        {% endblock %}
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <th colspan="3">
+                            Publicaciones
+                          </th>
+                        </tr>
+                      </tfoot>
+                    </table>
+                    <br><br>
+
+
+                </div>
+              
+
+            </div>
+          </div>
         </div>
-			
-        <h4 class="ui header" style="padding-left:0rem;"><strong>Aquí inicia el apoyo</strong></h4>
+      </div>
+    </div>
+  </div>
 
-        <br><br>
-        COVIBOT está buscando los posts más urgentes automáticamente en twitter
-        <input class="ui table segment" style="background-color: rgb(240, 242, 246);border:none;height: 6vh;padding-left: 20px">
-          <thead>
-            <tr>
-              <th>Search</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-        </input>
-
-        <table id="posts" class="display responsive ui table segment" style="background-color: rgb(240, 242, 246);border:none;">
-        	<thead>
-        		<tr>
-        			<th>Urgencia</th>
-        			<th>Status</th>
-        			<th>Notes</th>
-        		</tr>
-        	</thead>
-        	<tbody>
-                  {% block table %}
-                  {% endblock %}
-        	</tbody>
-        	<tfoot>
-        		<tr>
-        			<th colspan="3">
-        				Publicaciones
-        			</th>
-        		</tr>
-        	</tfoot>
-        </table>
-        <br><br>
-		</div>
-	</div>
-    
+</body>
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/7.15.2/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.15.2/firebase-analytics.js"></script>
@@ -101,18 +112,28 @@ database.on('value', function(snapshot){
 <!-- DataTables -->
 <script type="text/javascript" charset="utf8" src="https://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.jeditable/1.7.3/jquery.jeditable.js"></script>
-<script src="dataTable.js"></script> 
-</body>
 <!-- partial -->
 <script  src="{{ url_for('static',filename='js/script.js')}}"></script>
-</body>
+
 
 <script type="text/javascript">
-  $('#posts').DataTable();
-  console.log("Datatable loaded");
+  $('#posts').dataTable( {
+    "columnDefs": [
+      { className: "table-class", "targets": [ "_all" ] }
+    ],
+      "bScrollInfinite": true,
+      "bScrollCollapse": true,
+      "sScrollY": "55vh",
+      "pageResize": true,
+      "paging":true,
+    });  
+  $('.dataTables_filter').addClass('search_class');
+  $(window).scroll(function () { 
+     if ($(window).scrollTop() >= $(document).height() - $(window).height() - 10) {
+        //Add something at the end of the page
+     }
+  });
 </script>
-</html>
-
 
 
 

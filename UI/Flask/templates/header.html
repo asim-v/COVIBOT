@@ -35,7 +35,11 @@
   <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
   <link rel="stylesheet" href="{{url_for('static',filename='css/css-custom.css')}}">
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
+
+  <!-- FONTAWESOME   -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
 
 </head>
 
@@ -53,7 +57,12 @@
 <input id="nav-toggle" type="checkbox" aria-hidden="true"/>
 <div class="nav">
   <label class="nav-toggle" for="nav-toggle" onclick="onclick"></label>
-  <nav><a href="{{url_for('saved')}}">Guardados</a><a href="{{url_for('settings')}}">Configuración</a><a href="{{url_for('user_logout')}}">Cerrar Sesión</a></nav>
+  <nav>
+    <a class="user">{{user_name}}<i class="fa fa-user" style="font-size:20px;color:#fa485d;padding-left: 10px;"></i></a>
+    <a href="{{url_for('saved')}}">Guardados<i class="fa fa-save" style="font-size:20px;padding-left: 10px;"></i></a>
+    <a href="{{url_for('settings')}}">Configuración<i class="fa fa-cog" style="font-size:20px;padding-left: 10px;"></i></a><br><br><br>
+    <a href="{{url_for('user_logout')}}">Cerrar Sesión<i class="fa fa-sign-out" style="font-size:20px;padding-left: 10px;"></i></a>
+  </nav>
 </div>
 <!-- Nav   -->    
 

@@ -6,25 +6,36 @@ table{
   margin-left: 15px !important;
 }
 
-.message{
-  height: 100%;
-  padding: 2em;
-  box-shadow: none !important;max-width:250px;float:right;
+.save {
+  padding-left: 1em;
+  padding-right:1em;
+  padding: 0.5em; 
+  text-decoration: none;
+  background-color: 8px 8px 5px rgb(232, 232, 232) ;
+  color: gray; 
+  border-radius: 5px; 
+  box-shadow: none !important;
+  border:hidden;
+  max-width:250px; 
 }
-.custom-alert{
-  background-color: lighred;
+.expand{
+  text-align: left;
+  background-color: transparent;
+  border:none;
 }
-.custom-flag{
-  background-color: lighgreen;
-}
+
+.message{ padding-left: 1em;padding-right:1em;padding: 0.5em; text-decoration: none; color: #2B2B2B;
+border-radius: 5px; height: 20px; box-shadow: none !important;
+max-width:250px; } .custom-alert{ background-color: rgba(245,240,240,0.2); z-index: 1;backdrop-filter:blur(7px);}
+.custom-flag{ background-color: #ccffb8; color: green; }
 
 tbody tr {
   padding: 10px;
   transition: transform .2s; /* Animation */
   height: 50px;
   margin: 0 auto;
-  border-bottom: 5px grey !important; 
-  background-color: rgb(245, 247, 250) !important;
+  border-bottom: 5px grey ; 
+  background-color: rgb(245, 247, 250) ;
   border-radius: 30px;
   padding-bottom: 1em;   
 }
@@ -32,14 +43,17 @@ tbody tr {
 tbody tr:hover {
   transform: scale(1.03); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
   z-index: 1000 !important;
-  background-color: #fcf2f4 !important;
-  color: red;
-
+  background-color:#f5f5f5 !important;
+  color:black;
+  border-radius: 15px;
+  box-shadow: 8px 8px 5px rgb(232, 232, 232);
+}tbody tr:hover .save{
+  background-color: #fff3d1;
+  color: #ffa70f; 
 }
 
-label{
+.dataTables_wrapper label{
   display:grid !important;
-  margin-top:2vh;
   margin-bottom:2vh;
 }
 
@@ -48,6 +62,9 @@ table thead th,table tfoot th{
   border:0px !important;
 }
 
+.dataTables_scrollBody{
+  overflow-x: hidden !important;
+}
 
 
 
@@ -88,6 +105,14 @@ table thead th,table tfoot th{
 
 
 /* SRC:https://codepen.io/dimaZubkov/pen/dpdrEK; */
+.user{
+  background-color: #fff0f2;
+  color: #fa485d !important;
+  text-align: center;
+  margin: 15px;
+  border-radius: 30px;
+}
+
 .nav {
   width: 320px;
   position: fixed;
@@ -101,10 +126,11 @@ table thead th,table tfoot th{
   -webkit-transition: 0.25s;
   transition: 0.25s;
   color: black;
+
 }
 .nav-toggle {
-  position: relative;
-  right: 6em;
+  position: absolute;
+  right: 23em;
   color:black;
   cursor: pointer;
 }
@@ -116,7 +142,6 @@ table thead th,table tfoot th{
 .nav-toggle:before {
   content: '☰';
   background: rgba(240, 242, 246,0.3);
-  backdrop-filter:blur(5px);
   color: #2B2B2B;
   display: inline-block;
   margin: 0.5em;
@@ -145,8 +170,7 @@ table thead th,table tfoot th{
   right: 320px;
   height: 100vh;
   width: 100vw;
-  background: black;
-  opacity: 0.2;
+  backdrop-filter: blur(2px) opacity(75%);
 }
 .nav nav {
   text-align: right;
@@ -177,4 +201,73 @@ table thead th,table tfoot th{
 }
 main{
   margin-left: -15px;
+}
+
+
+
+
+
+
+
+
+
+
+/*Spinner Circle Rotation */
+
+.sp {
+  margin-left: 1em;
+  margin-right: 1em;
+  width: 15px;
+  height: 15px;
+  clear: both;
+}
+
+/* Spinner Circle Rotation */
+.sp-circle {
+  border: 4px rgba(0, 0, 0, 0.25) solid;
+  border-top: 4px black solid;
+  border-radius: 50%;
+  -webkit-animation: spCircRot .6s infinite linear;
+  animation: spCircRot .6s infinite linear;
+}
+
+@-webkit-keyframes spCircRot {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(359deg);
+  }
+}
+@keyframes spCircRot {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+
+
+
+
+
+
+/*EXPAND*/
+tr.clickable-row {
+  cursor: pointer;
+}
+
+tr.clickable-row td {
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+tr.clickable-row:hover td {
+  background-color: #e7e7e7;
+  border-color: #F8F8F8;
 }

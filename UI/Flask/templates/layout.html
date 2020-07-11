@@ -18,30 +18,33 @@
                             <h1>COVIBOT 🦠</h1>
                         </div>
                         <div class="col-sm">
-                            {% if error %}  
-                                <div class="ui red message custom-alert" >
-                                    Error: {{ error }}
-                                </div>            
-                            {% else %} 
-                                <div id="Counter" class="ui green message custom-flag">
-                                    Conexión establecida
-                                </div>
-                            {% endif %} 
+
                         </div>
                     </div>
                     <div class="row">
                       <div class="col-sm-12">
-                        <h5>  COVIBOT está buscando los posts más urgentes automáticamente en twitter</h5>
+                        <h5>  COVIBOT lleva 
+                          {% if error %}  
+                              <a class="ui red message custom-alert" >
+                                  Error: {{ error }}
+                              </a>            
+                          {% else %} 
+                              <a id="Counter" class="ui green message custom-flag">
+                                  Conexión establecida
+                              </a>
+                          {% endif %} 
+                            tweets analizados, en tiempo real.
+                        </h5>
                       </div>
                     </div>
 
 
                     
 
-
                     <table id="posts" class="table_class ">
                       <thead>
                         <tr>
+                          <th></th>
                           <th>Urgencia</th>
                           <th>Status</th>
                           <th>Notes</th>
@@ -52,11 +55,7 @@
                         {% endblock %}
                       </tbody>
                       <tfoot>
-                        <tr>
-                          <th colspan="3">
-                            Publicaciones
-                          </th>
-                        </tr>
+
                       </tfoot>
                     </table>
                     <br><br>
@@ -100,9 +99,67 @@ firebase.analytics();
 var database = firebase.database().ref('status/count');    
 database.on('value', function(snapshot){
     var changedUser = snapshot.val();
-    document.getElementById("Counter").innerHTML = changedUser + "  Posts Analizados";
+    document.getElementById("Counter").innerHTML = changedUser ;
 });
     
+
+$(document).ready(function() {
+
+    $('#example tr').click(function() {
+        var href = $(this).find("a").attr("href");
+        if(href) {
+            window.location = href;
+        }
+    });
+
+});
+
+function create_new_note() {
+  $("#btn-create-new-chat").html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Creando ...');
+  fetch("/new-chat/create")
+    .then((data) => {
+      console.log(data);
+      $("#btn-create-new-chat").html("Listo!");
+      window.location = data['url'];
+    },
+      (error) => {
+        console.log(error);
+        $("#btn-create-new-chat").html("Hubo un error.");
+      });
+}
+
+function save(clicked_id){
+  clicked_id = clicked_id.slice(6);
+  console.log("button:"+clicked_id.toString());
+  $("#BUTTON:"+clicked_id).html('<div class="sp sp-circle" role="status" aria-hidden="true"></div>');   //SOLAMENTE CAMBIA EL ESTILO MIENTRAS QUE HREF HACE EL BACKEND
+  fetch("/save/"+clicked_id)
+  .then((data) => {
+    console.log(data);
+    $("#BUTTON:"+clicked_id).html("Guardado!");
+    $("#BUTTON:"+clicked_id).css("background-color","#ccffb8");
+    $("#BUTTON:"+clicked_id).css("color","green");
+  },
+    (error) => {
+      console.log(error);
+      $("#BUTTON:"+clicked_id).html("Hubo un error.");
+    });
+}
+function expand(clicked_id){
+  clicked_id = clicked_id.slice(4);
+  console.log("expand: "+clicked_id.toString());
+  $("#ROW:"+clicked_id).html('<div class="sp sp-circle" role="status" aria-hidden="true"></div>');   //SOLAMENTE CAMBIA EL ESTILO MIENTRAS QUE HREF HACE EL BACKEND
+  fetch("/expand/"+clicked_id)
+  .then((data) => {
+    console.log(data);
+    $("#ROW:"+clicked_id).html("Guardado!");
+    $("#ROW:"+clicked_id).css("background-color","#ccffb8");
+    $("#ROW:"+clicked_id).css("color","green");
+  },
+    (error) => {
+      console.log(error);
+      $("#ROW:"+clicked_id).html("Hubo un error.");
+    });
+}
 </script>
     
     
@@ -114,18 +171,26 @@ database.on('value', function(snapshot){
 <script src="https://cdn.jsdelivr.net/jquery.jeditable/1.7.3/jquery.jeditable.js"></script>
 <!-- partial -->
 <script  src="{{ url_for('static',filename='js/script.js')}}"></script>
+  <div id="wrapper">
+
+
+    <div class="scrollbar" id="style-1">
+      
+    </div>
 
 
 <script type="text/javascript">
   $('#posts').dataTable( {
     "columnDefs": [
-      { className: "table-class", "targets": [ "_all" ] }
-    ],
-      "bScrollInfinite": true,
-      "bScrollCollapse": true,
-      "sScrollY": "55vh",
-      "pageResize": true,
-      "paging":true,
+      { className: "table-class", "targets": [ "_all" ] },
+      { "width": "70%", "targets": 3 }],
+    "oLanguage": {
+      "sSearch": "Buscar"},
+    "bScrollInfinite": true,
+    "bScrollCollapse": true,
+    "sScrollY": "55vh",
+    "pageResize": true,
+    "paging":true,
     });  
   $('.dataTables_filter').addClass('search_class');
   $(window).scroll(function () { 

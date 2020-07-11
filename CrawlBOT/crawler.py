@@ -225,7 +225,7 @@ class MyStreamListener(StreamListener):
             #SAVES DATA
             if IsTopic(Tweet['tw_text']):
                 #UPDATES DB STATE
-                db.child("extraction").push(Tweet)
+                db.child("test").push(Tweet)
                 StrNum = str(int(db.child("status").child("count").get().val())+1)
                 db.child("status").update({"count":StrNum})
                 # Plus one to the counter
@@ -250,7 +250,7 @@ if __name__ == '__main__':
                 'botiquín médico','doctora', 'enfermero','mircroempresas','sobrevivir a la cuarentena',
                 'personal de salud','centro de acopio','adultos mayores','situacion vulnerable', 'salud mental', 'nutricion','resilencia',
                 'acompañamiento','psicosocial','confinamiento en casa','tercera edad','mantenerte seguro',
-                'test', 'apoyo', 'ayuda en casa','voluntatio','salud','caretas',
+                'test', 'apoyo', 'ayuda en casa','voluntario','salud','caretas',
                 'emergencia','hospital','pandemia','higiene','provisiones','soporte','comida saludable','necesito','necesidades','caridad'
                 'donar','donación','ofrecemos','donativo','suministros','servicios','bienestar','positivo','personal','vulnerable','vacuna',
                 'soporte','recuperados','respiradores','hospital','emergencia','urgencia','urgente','compromiso',
@@ -265,7 +265,7 @@ if __name__ == '__main__':
         auth = Get_Authentication()
         
         #Se conecta a la api de twitter para extraer con la ventana de 15 minutos
-        api = API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True, retry_delay=5, retry_errors=5)
+        api = API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True, retry_delay=5, retry_errors=5,tweet_mode='extended')
         while True:            
             try:
                 myStreamListener = MyStreamListener()

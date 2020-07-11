@@ -3,11 +3,27 @@ from flask import Flask, render_template, request, url_for, redirect, flash, ses
 from flask_mail import Mail, Message
 #For File Management
 from werkzeug.utils import secure_filename
-
+from types import SimpleNamespace as Namespace
 #Object Json Generator
 from collections import namedtuple
 import json
 #Object Json Generator
+
+
+#Twitter
+# Imports from the Tweepy API
+import tweepy
+from tweepy.streaming import StreamListener
+from tweepy import OAuthHandler
+from tweepy import Stream
+from tweepy import API
+# To check if the file exist
+import os.path
+# Another imports to parse the json
+import json
+from urllib3.exceptions import ProtocolError
+
+
 
 
 # imports for firebase
@@ -94,10 +110,42 @@ db = firestore.client()
 users_coll = db.collection(u"users")
 
 
+#Twitter API
+CON_KEY = "CkulBfQE91jOJBNIuMb1TUbWt"
+CON_KEY_SECRET = "aWAm88ju62F7CnK8s7fS5r8eDj6mXGEWnhSMKP5aMJiz5WGVfs"
+ACC_TOKEN = "2796790086-9ffNbN5qpRrMd3B6eSKx0dBQhgHk7kEjDLqRAA1"
+ACC_TOKEN_SECRET = "wYQzqIaMgSXICG5Zh7FDE3EBgW5R45paax763eTfyxt9E"
+# Validate the Credentials
+Auth = OAuthHandler(CON_KEY, CON_KEY_SECRET)
+# Validate the Acces Tokens
+Auth.set_access_token(ACC_TOKEN, ACC_TOKEN_SECRET)
+api = tweepy.API(Auth)
 
 
+def GetTweet(id):	   
+	'''
+		Obtiene tweet de la bd y actualiza el texto con el contenido completo
+	'''
 
+	# Importa database module.	
+	data = rtdb.reference("extraction").order_by_child("tw_id_str").equal_to(id).limit_to_first(1).get()
 
+	# Parsea JSON en un objeto correspondiente por cada keys del dict.
+	def json2obj(x,show = False): 		
+
+		#twitter.com/anyuser/status/541278904204668929
+
+		def _json_object_hook(d): return namedtuple("tweet", d.keys())(*d.values())
+		data = str(dict(x)[list(x.keys())[0]])
+		data = str(data).replace(': False',': "False"').replace(': True',': "True"').replace("'",'"')
+
+		if show == True: print(json.dumps(x, indent=4, sort_keys=True))
+		return json.loads(data, object_hook=_json_object_hook)
+	try:
+		return dict(data)[list(data.keys())[0]]
+	except Exception as e:
+		return e
+	#print(type(snapshot[post]),snapshot[post],json2obj(snapshot[post]))
 
 
 def GetPosts(sortby = 'rt_OgRetwCount',limit=1000):	   
@@ -147,8 +195,8 @@ def index_page():
 		except Exception as e:
 			# if unable to verify session_id for any reason
 			# maybe invalid or expired, redirect to login
-			session["status"] = "Tu sesión ha expirado!" + str(e)
-			return render_template('sign-in-img.html',status=session["status"])
+			session["status"] = "Tu sesión ha expirado!, ingresa de nuevo."
+			return render_template('landing.html',status=session["status"])
 			#return "INDEX EXCEPTION" + str(e)
 
 	return render_template('landing.html')   
@@ -178,7 +226,8 @@ def user_register():
 			users_coll.add({"name": user_name,
 							"email": user_email,
 							"model_desc":'',
-							"model_file":{"model_id":0,"model_team":[session['id']],"model_name":''}
+							"saved_tweets":[],
+							"model_file":{"model_id":0,"model_name":''}
 			}, user_recode.get('localId'))
 			
 			session["status"] = "Success"
@@ -264,6 +313,7 @@ def user_login():
 
 
 
+
 #MODEL MANAGEMENT
 def save_json(data,uid = None):
 	'''
@@ -303,6 +353,24 @@ def allowed_file(filename):
 		Extensión en extensiones permitidas?
 	'''
 	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+#TWT Save
+@app.route('/save/<tw_id>')
+def save(tw_id):
+	user_doc = users_coll.document(session['id'])
+	saved_tweets = user_doc.get().to_dict().get("saved_tweets")	
+	if tw_id not in saved_tweets:
+		saved_tweets.append(tw_id)
+		save_json({"saved_tweets":saved_tweets})
+
+	return "sweet fam"
+
+
+@app.route('/expand/<tw_id>')
+def expand(tw_id):
+	return GetTweet(tw_id)
+
+
 
 
 @app.route("/update", methods=["POST"])
@@ -361,7 +429,10 @@ def settings():
 
 @app.route('/saved')
 def saved():
-	pass
+	user_doc = users_coll.document(session['id'])
+	model_details = user_doc.get().to_dict().get("saved_tweets")	
+	return str(model_details)
+	return render_template("saved.html")
 
 @app.route('/logout')
 def user_logout():

@@ -27,6 +27,9 @@
         <div class="container" >
           <div class="row">
             <div class="col-lg-5 order-lg-2">
+              {% if status %}
+                <div class="alert custom-alert">{{status}}</div>
+              {% endif %}
               <div class="hero-img-group">
                 <div class="abs-img img-1 d-none d-lg-block" data-aos="zoom-out" data-aos-duration="400" data-aos-once="true" data-aos-delay="300">
                   <img src="images/png-l2-hero-oval1.png" alt=""></div>
@@ -37,7 +40,7 @@
             <div class="col-md-9 col-lg-7 order-lg-1" data-aos="fade-right" data-aos-duration="500" data-aos-once="true" >
               <div class="hero-content py--50 pr-lg--80">
                 <h1 class="title">Encuentra y ofrece ayuda automáticamente.</h1>
-                <p>COVIBOT es un sistema que está analizando los tweets en tiempo real para identificar los posts más relevantes, ingresa a verlos.</p>
+                <p>COVIBOT es una IA que analiza los tweets en tiempo real para identificar los posts más relevantes, como necesidades u ofertas de servicios médicos de voluntarios, ingresa a verlos.</p>
                     <button class="btn--primary hvr-bounce-to-left"  style="left: 0;" 
                     onclick="window.location.href='{{ url_for('user_register') }}'">Registrarse!</button>
               </div>

@@ -1,3 +1,38 @@
+'''
+COVIBOT PLATFORM: 
+
+OBJETIVO:
+	AI platform:
+		- Poder desplegar modelos de ia con el agente de escucha de twitter(buscar expandirse en el futuro) en la nube
+			- Categorización de oferta y demanda.
+			- Analisis de categorizacion de oferta y demanda
+		- Agregar,previsualiza y estudiar dinámicamente columnas en la bd y commitear changes
+
+	Interfaz:
+		- Poder analizar, guardar, contactar automáticamente las publicaciones interesantes al usuario
+
+	Registro:
+		- Admin
+		- Usuario
+			- Ofrecedor.
+			- Necesitador.
+			- Ambos
+
+TODO: 
+	- Train new models
+	- Nginx Routing
+	- Cool Scrolling
+	- Finish Security
+
+IN PROGRESS:
+	- Full Quering
+
+DONE:
+	- Interface Template
+
+
+'''
+
 # imports for flask
 from flask import Flask, render_template, request, url_for, redirect, flash, session, jsonify,send_from_directory
 from flask_mail import Mail, Message
@@ -148,7 +183,7 @@ def GetTweet(id):
 	#print(type(snapshot[post]),snapshot[post],json2obj(snapshot[post]))
 
 
-def GetPosts(sortby = 'rt_OgRetwCount',limit=1000):	   
+def GetPosts(sortby = 'rt_OgRetwCount',limit=20):	   
 	
 	# Importa database module.	
 	ref = rtdb.reference('extraction') #Establece ref a grupo de posts

@@ -2,9 +2,9 @@
 
 {% block table %}
     {% for e in posts %}        
-        <tr class="clickable-row expand" data-href="" id="ROW:{{e.tw_id_str}}" onclick="expand(this.id)" >                    
-        <!-- <tr class="clickable-row" >                     -->
-            <td><button id="BUTTON:{{e.tw_id_str}}" onclick="save(this.id)" class="save" >Guardar</button></td>
+        <tr class="clickable-row " data-href="" id="ROW:{{e.tw_id_str}}" onclick="expand(this.id)" >                    
+        <!-- <tr >                     -->
+            <td><button id="{{e.tw_id_str}}" onclick="save(this.id)" class="save">Guardar</button></td>
             <td>{{e.rt_OgRetwCount}}</td>
             <td>{{e.tw_text}}</td>
             <td>{{e.usr_name}}</td>

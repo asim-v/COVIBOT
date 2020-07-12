@@ -129,28 +129,29 @@ function create_new_note() {
 }
 
 function save(clicked_id){
-  clicked_id = clicked_id.slice(6);
-  console.log("button:"+clicked_id.toString());
-  $("#BUTTON:"+clicked_id).html('<div class="sp sp-circle" role="status" aria-hidden="true"></div>');   //SOLAMENTE CAMBIA EL ESTILO MIENTRAS QUE HREF HACE EL BACKEND
+  // clicked_id = clicked_id.slice(3);
+  $("#"+clicked_id).html('<div class="sp sp-circle" role="status" aria-hidden="true"></div>');
   fetch("/save/"+clicked_id)
   .then((data) => {
     console.log(data);
-    $("#BUTTON:"+clicked_id).html("Guardado!");
-    $("#BUTTON:"+clicked_id).css("background-color","#ccffb8");
-    $("#BUTTON:"+clicked_id).css("color","green");
+    $("#"+clicked_id).html("Guardado!");
+    $("#"+clicked_id).css("background-color","#ccffb8");
+    $("#"+clicked_id).css("color","green");
   },
-    (error) => {
-      console.log(error);
-      $("#BUTTON:"+clicked_id).html("Hubo un error.");
-    });
+  (error) => {
+    console.log(error);
+    $("#"+clicked_id).html("Hubo un error.");
+  });
 }
 function expand(clicked_id){
   clicked_id = clicked_id.slice(4);
-  console.log("expand: "+clicked_id.toString());
+  console.log("ROW:"+clicked_id)
+  document.getElementById("#ROW:"+clicked_id).innerHTML = "Ya dejese de joteris parienting"
   $("#ROW:"+clicked_id).html('<div class="sp sp-circle" role="status" aria-hidden="true"></div>');   //SOLAMENTE CAMBIA EL ESTILO MIENTRAS QUE HREF HACE EL BACKEND
   fetch("/expand/"+clicked_id)
   .then((data) => {
     console.log(data);
+    $("#ROW:"+clicked_id).addClass("expand");
     $("#ROW:"+clicked_id).html("Guardado!");
     $("#ROW:"+clicked_id).css("background-color","#ccffb8");
     $("#ROW:"+clicked_id).css("color","green");
@@ -163,24 +164,24 @@ function expand(clicked_id){
 </script>
     
     
-    
+<!-- Jquey -->    
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.jeditable/1.7.3/jquery.jeditable.js"></script>
 <!-- DataTables -->
 <script type="text/javascript" charset="utf8" src="https://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
-<script src="https://cdn.jsdelivr.net/jquery.jeditable/1.7.3/jquery.jeditable.js"></script>
-<!-- partial -->
-<script  src="{{ url_for('static',filename='js/script.js')}}"></script>
-  <div id="wrapper">
 
 
-    <div class="scrollbar" id="style-1">
-      
-    </div>
+
+
+
+<script type="text/javascript" src="https://bartaz.github.io/sandbox.js/jquery.highlight.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/plug-ins/1.10.21/features/searchHighlight/dataTables.searchHighlight.css">
+<script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.21/features/searchHighlight/dataTables.searchHighlight.min.js"></script>
 
 
 <script type="text/javascript">
-  $('#posts').dataTable( {
+  var table = $('#posts').DataTable( {
     "columnDefs": [
       { className: "table-class", "targets": [ "_all" ] },
       { "width": "70%", "targets": 3 }],
@@ -191,6 +192,7 @@ function expand(clicked_id){
     "sScrollY": "55vh",
     "pageResize": true,
     "paging":true,
+    "searchHighlight": true
     });  
   $('.dataTables_filter').addClass('search_class');
   $(window).scroll(function () { 

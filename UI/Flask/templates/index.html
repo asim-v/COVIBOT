@@ -5,8 +5,14 @@
             <tr class="clickable-row " data-href="" id="R:{{e.tw_id_str}}" onclick="expand(this.id)">                    
             <!-- <tr >                     -->
                 <td>
-                    <button id="{{e.tw_id_str}}" onclick="save(this.id)" class="t-button ">Guardar</button><br>
-                    <button onclick="contact(this.id)" class="t-button appear">Contactar</button><br>
+                    <button id="{{e.tw_id_str}}" onclick="save(this.id)" class="t-button {% if e.tw_id_str in saved %} saved {% endif %}">
+                        {% if e.tw_id_str in saved %} 
+                            Guardado
+                        {% else %}
+                            Guardar
+                        {% endif %}
+                    </button><br>
+                    <button id="C{{e.tw_id_str}}" onclick="contact(this.id)" class="t-button appear">Contactar</button><br>
                 </td>
                 <td>{{e.rt_OgRetwCount}}</td>
                 <td>{{e.tw_text}}</td>

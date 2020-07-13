@@ -13,7 +13,7 @@ table{
   border:10px;
   padding-left: 1em;
   padding-right:1em;
-  padding: 0.5em; 
+  padding: 0.3em; 
   text-decoration: none;
   background-color: 8px 8px 5px rgb(232, 232, 232) ;
   color: gray; 
@@ -22,7 +22,13 @@ table{
   border:hidden;
   max-width:250px; 
   margin-top:10px;  
-  border: 3px solid white;
+  border: 3px solid transparent;
+}
+.saved{
+  background-color: #ccffb8 !important;
+  color: green !important;
+}.saved:hover{
+  border:3px solid green !important;
 }
 
 .hidden{
@@ -52,7 +58,7 @@ max-width:250px; } .custom-alert{ background-color: rgba(245,240,240,0.2); z-ind
 
 tbody tr {
   padding: 10px;
-  transition: transform .2s; /* Animation */
+  transition: all .2s; /* Animation */
   height: 50px;
   margin: 0 auto;
   border-bottom: 5px grey ; 

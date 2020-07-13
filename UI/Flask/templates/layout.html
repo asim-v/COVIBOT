@@ -50,10 +50,10 @@
                     <table id="posts" class="table_class ">
                       <thead>
                         <tr>
-                          <th></th>
+                          <th>Guardar?</th>
                           <th>Urgencia</th>
-                          <th>Status</th>
-                          <th>Notes</th>
+                          <th>Resumen</th>
+                          <th>Categoria</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -135,18 +135,37 @@ function create_new_note() {
 }
 
 function save(clicked_id){
+  event.stopPropagation();   //Evita que se cliqueee el fondo
   // clicked_id = clicked_id.slice(3);
   $("#"+clicked_id).html('<div class="sp sp-circle" role="status" aria-hidden="true"></div>');
   fetch("/save/"+clicked_id)
   .then((data) => {
     console.log(data);
-    $("#"+clicked_id).html("Guardado!");
-    $("#"+clicked_id).css("background-color","#ccffb8");
-    $("#"+clicked_id).css("color","green");
+    button = document.getElementById(clicked_id);
+    if  (!(button.classList.contains("saved"))){
+      button.classList.add("saved");
+      $("#"+clicked_id).html("Guardado!");
+    }
   },
   (error) => {
     console.log(error);
     $("#"+clicked_id).html("Hubo un error.");
+  });
+}
+function contact(clicked_id){
+  event.stopPropagation();   //Evita que se cliqueee el fondo
+  clicked_id = clicked_id.slice(1);
+  $("#C"+clicked_id).html('<div class="sp sp-circle" role="status" aria-hidden="true"></div>');
+  fetch("/contact/"+clicked_id)
+  .then((data) => {
+    console.log(data);
+    $("#C"+clicked_id).html("Enviado!");
+    $("#C"+clicked_id).css("background-color","#ccffb8");
+    $("#C"+clicked_id).css("color","green");
+  },
+  (error) => {
+    console.log(error);
+    $("#C"+clicked_id).html("Hubo un error.");
   });
 }
 

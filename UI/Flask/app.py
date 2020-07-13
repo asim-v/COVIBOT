@@ -225,8 +225,11 @@ def index_page():
 			connected_chats = user_details.get("connected_chats")
 			session["user_name"] = user_details.get("name")
 
+			#Gets already saved tweets
+			user_doc = users_coll.document(session['id'])
+			saved = [str(x) for x in user_doc.get().to_dict().get("saved_tweets")]
 
-			return render_template("index.html",posts=GetPosts()[0],user_name = session["user_name"],active=1,title = "COVIBOT",subtitle = "count")
+			return render_template("index.html",posts=GetPosts()[0],user_name = session["user_name"],active=1,title = "COVIBOT",subtitle = "count",saved=saved)
 		except Exception as e:
 			# if unable to verify session_id for any reason
 			# maybe invalid or expired, redirect to login
@@ -400,6 +403,9 @@ def save(tw_id):
 
 	return "sweet fam"
 
+@app.route('/contact/<tw_id>')
+def contact(tw_id):
+	return jsonify(2)
 
 @app.route('/expand/<tw_id>')
 def expand(tw_id):

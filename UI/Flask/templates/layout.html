@@ -15,7 +15,7 @@
 
                     <div class="row">
                         <div class="col-sm-8" >
-                            <h1>COVIBOT</h1>
+                            <h1>{{title}}</h1>
                         </div>
                         <div class="col-sm">
 
@@ -23,18 +23,24 @@
                     </div>
                     <div class="row">
                       <div class="col-sm-12" style="color: #858585">
-                        <h5>  COVIBOT lleva 
-                          {% if error %}  
-                              <a class="ui red message custom-alert" >
-                                  Error: {{ error }}
-                              </a>            
-                          {% else %} 
-                              <a id="Counter" class="ui red message custom-flag">
-                                  Conexión establecida
-                              </a>
-                          {% endif %} 
-                            tweets analizados, en tiempo real.
-                        </h5>
+                        {% if subtitle == "count" %}
+                          <h5>  COVIBOT lleva 
+                            {% if error %}  
+                                <a class="ui red message custom-alert" >
+                                    Error: {{ error }}
+                                </a>            
+                            {% else %} 
+                                <a id="Counter" class="ui red message custom-flag">
+                                    Conexión establecida
+                                </a>
+                            {% endif %} 
+                              tweets analizados, en tiempo real.
+                          </h5>
+                        {% else %}
+                          <h5>
+                            {{subtitle}}
+                          </h5>
+                        {% endif %}                        
                       </div>
                     </div>
 

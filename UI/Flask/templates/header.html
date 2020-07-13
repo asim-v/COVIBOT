@@ -58,10 +58,12 @@
 <div class="nav">
   <label class="nav-toggle" for="nav-toggle" onclick="onclick"></label>
   <nav>
-    <a class="user">{{user_name}}<i class="fa fa-user" style="font-size:20px;color:#fa485d;padding-left: 10px;"></i></a>
-    <a href="{{url_for('saved')}}">Guardados<i class="fa fa-save" style="font-size:20px;padding-left: 10px;"></i></a>
-    <a href="{{url_for('settings')}}">Configuración<i class="fa fa-cog" style="font-size:20px;padding-left: 10px;"></i></a><br><br><br>
-    <a href="{{url_for('user_logout')}}">Cerrar Sesión<i class="fa fa-sign-out" style="font-size:20px;padding-left: 10px;"></i></a>
+    
+    <a class="user">{{user_name}}<i class="fa fa-user" style="font-size:20px;color:#2B2B2B;padding-left: 10px;"></i></a>
+    <a href="{{url_for('index_page')}}" {%if active==1 %}class="active"{%endif%}>COVIBOT<i class="fa fa-ambulance" style="font-size:20px;padding-left: 10px;"></i></a>
+    <a href="{{url_for('saved')}}" {%if active==2 %}class="active"{%endif%}>Guardados<i class="fa fa-save" style="font-size:20px;padding-left: 10px;"></i></a>
+    <a href="{{url_for('settings')}}" {%if active==3 %}class="active"{%endif%}>Configuración<i class="fa fa-cog" style="font-size:20px;padding-left: 10px;"></i></a><br><br><br>
+    <a href="{{url_for('user_logout')}}" {%if active==4 %}class="active"{%endif%}>Cerrar Sesión<i class="fa fa-sign-out" style="font-size:20px;padding-left: 10px;"></i></a>
   </nav>
 </div>
 <!-- Nav   -->    

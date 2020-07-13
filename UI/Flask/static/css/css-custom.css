@@ -136,8 +136,8 @@ table thead th,table tfoot th{
 
 /* SRC:https://codepen.io/dimaZubkov/pen/dpdrEK; */
 .user{
-  background-color: #fff0f2;
-  color: #fa485d !important;
+  background-color: #EFEFEF;
+  color: #2B2B2B !important;
   text-align: center;
   margin: 15px;
   border-radius: 30px;
@@ -212,6 +212,9 @@ table thead th,table tfoot th{
   padding-left: 30px;
   display: block;
   color: #2B2B2B;
+}
+.nav  .active{
+  background-color: #fff0f2;color: #fa485d;
 }
 .nav nav a:hover {
   background-color: #fff0f2;

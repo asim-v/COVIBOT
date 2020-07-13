@@ -2,21 +2,26 @@
 
 {% block table %}
     {% for e in posts %}        
-        <tr class="clickable-row expand" data-href="" id="ROW:{{e.tw_id_str}}" onclick="expand(this.id)" >                    
-        <!-- <tr class="clickable-row" >                     -->
-            <td><button id="BUTTON:{{e.tw_id_str}}" onclick="save(this.id)" class="save" >Guardar</button></td>
-            <td>{{e.rt_OgRetwCount}}</td>
-            <td>{{e.tw_text}}</td>
-            <td>{{e.usr_name}}</td>
-        </tr>
+            <tr class="clickable-row " data-href="" id="R:{{e.tw_id_str}}" onclick="expand(this.id)">                    
+            <!-- <tr >                     -->
+                <td>
+                    <button id="{{e.tw_id_str}}" onclick="save(this.id)" class="t-button ">Guardar</button><br>
+                    <button onclick="contact(this.id)" class="t-button appear">Contactar</button><br>
+                </td>
+                <td>{{e.rt_OgRetwCount}}</td>
+                <td>{{e.tw_text}}</td>
+                <td>{{e.usr_name}}</td>
+            </tr>
     {% endfor %}    
 {% endblock %}
 
 
 {% block map %}
   <link rel="stylesheet" href="{{url_for('static',filename='css/css-map.css')}}">
-  <div class="fixed">
-    <div class="map">
+  <div class="fixed" id="fixed">
+        <div class="middle"><button onclick="CloseMap()"><i class="fa fa-angle-left" aria-hidden="true"></i></button></div>
+        <div class="map">
+
       <script src='https://maps.googleapis.com/maps/api/js?sensor=false'></script><script rel="stylesheet" src="{{url_for('static',filename='js/js-map.js')}}"></script>
     </div>
   </div>

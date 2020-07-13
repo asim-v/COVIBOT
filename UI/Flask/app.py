@@ -226,7 +226,7 @@ def index_page():
 			session["user_name"] = user_details.get("name")
 
 
-			return render_template("index.html",posts=GetPosts()[0],user_name = session["user_name"])
+			return render_template("index.html",posts=GetPosts()[0],user_name = session["user_name"],active=1,title = "COVIBOT",subtitle = "count")
 		except Exception as e:
 			# if unable to verify session_id for any reason
 			# maybe invalid or expired, redirect to login
@@ -465,9 +465,10 @@ def settings():
 @app.route('/saved')
 def saved():
 	user_doc = users_coll.document(session['id'])
-	model_details = user_doc.get().to_dict().get("saved_tweets")	
-	return str(model_details)
-	return render_template("saved.html")
+	saved = user_doc.get().to_dict().get("saved_tweets")	
+	result = [GetTweet(x) for x in saved]
+	# return str(saved)
+	return render_template("saved.html",posts = result,user_name = session["user_name"],active = 2,title="Guardados",subtitle = "Aqui puedes explorar y contactar automáticamente las publicaciones que te interesa apoyar o las cuales necesites apoyo")
 
 @app.route('/logout')
 def user_logout():

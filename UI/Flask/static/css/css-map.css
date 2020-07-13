@@ -42,7 +42,8 @@
     border-top-right-radius: 110px;  /* 100px of height + 10px of border */
     border-bottom-right-radius: 110px;	
 }.lefts button:hover{
-
+	transition: all 0.1s ease-in-out;
+	box-shadow: 2px 2px 5px rgb(232, 232, 232);
 }
 
 .open{
@@ -56,6 +57,7 @@
   height: 100vh;
 }
 .fixed{
+  transition: width 0.5s;
   width: 40%;
   position: fixed;
 }

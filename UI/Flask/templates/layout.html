@@ -3,13 +3,13 @@
 <body id="DataGrid">
   <div class="container-fluid">
     <div class="row">      
-      <div class="col-md-6">
+      <div class="col-md-5" id="map-col">
         {% block map %}
         {% endblock %}
       </div>  
-      <div class="col-md-6">
+      <div class="col-md-7 " id="table-col">
         <div class="container-fluid" >
-          <div class="ui table grid" style="margin-top: 1em;">
+          <div class="ui table grid center" style="margin-top: 1em;">
             <div class="ui one column grid">      
                 <div class="table">
 
@@ -221,10 +221,48 @@ function expand(clicked_id){
     button2.style.position = "absolute";
     row.classList.remove("expand")
   }
-  
-
-
 }
+
+function CloseMap(){
+
+  fixed = document.getElementById("fixed");
+  col = document.getElementById("map-col");
+  table = document.getElementById("table-col");
+
+  console.log(col.classList.contains("col-md-5"))
+
+  if (col.classList.contains("col-md-5")){
+
+    fixed.style.width = "0%";
+    col.classList.remove("col-md-5");
+
+    var div = document.createElement("div");
+    div.setAttribute('id','idcont')
+    div.classList.add("lefts");
+    var button = document.createElement("button");
+    button.insertAdjacentHTML( 'beforeend', '  <i class="fa fa-map" aria-hidden="true"></i>    ' );
+    button.setAttribute('onclick','CloseMap()')
+    button.setAttribute('id','leftbutton')
+
+    div.appendChild(button);
+
+    table.classList.add("center");
+    table.appendChild(div);
+  }else{
+
+    fixed.style.width = "40%";
+    col.classList.add("col-md-5");
+
+    var div = document.getElementById("idcont");
+    div.classList.remove("lefts");
+
+    div.removeChild(document.getElementById("leftbutton"));
+
+    table.classList.remove("center");
+    table.removeChild(div);
+  }
+}
+
 </script>
     
     

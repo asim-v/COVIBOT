@@ -50,7 +50,7 @@ class GoogleMap {
         "featureType": "poi",
         "elementType": "geometry",
         "stylers": [{
-          "color": "#dddddd" }] },
+          "color": "#fa485d" }] },
 
 
       {

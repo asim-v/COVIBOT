@@ -48,7 +48,7 @@ table{
 .message{ padding-left: 1em;padding-right:1em;padding: 0.5em; text-decoration: none; color: #2B2B2B;
 border-radius: 5px; height: 20px; box-shadow: none !important;
 max-width:250px; } .custom-alert{ background-color: rgba(245,240,240,0.2); z-index: 1;backdrop-filter:blur(7px);}
-.custom-flag{ background-color: #ccffb8; color: green; }
+.custom-flag{ background-color: #fff0f2; color: #fa485d; }
 
 tbody tr {
   padding: 10px;

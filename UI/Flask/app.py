@@ -34,7 +34,7 @@ DONE:
 '''
 
 # imports for flask
-from flask import Flask, render_template, request, url_for, redirect, flash, session, jsonify,send_from_directory
+from flask import Flask, render_template, request, url_for, redirect, flash, session, jsonify,send_from_directory,make_response
 from flask_mail import Mail, Message
 #For File Management
 from werkzeug.utils import secure_filename
@@ -183,7 +183,7 @@ def GetTweet(id):
 	#print(type(snapshot[post]),snapshot[post],json2obj(snapshot[post]))
 
 
-def GetPosts(sortby = 'rt_OgRetwCount',limit=20):	   
+def GetPosts(sortby = 'rt_OgRetwCount',limit=50):	   
 	
 	# Importa database module.	
 	ref = rtdb.reference('extraction') #Establece ref a grupo de posts
@@ -403,7 +403,7 @@ def save(tw_id):
 
 @app.route('/expand/<tw_id>')
 def expand(tw_id):
-	return GetTweet(tw_id)
+	return jsonify(GetTweet(tw_id))
 
 
 

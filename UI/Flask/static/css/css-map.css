@@ -1,6 +1,26 @@
 /*
   Map
 */
+.middle button{
+	position: absolute;
+	z-index: 1;
+	color: grey;
+	height: 10vh;
+	background-color: rgb(245, 247, 250);
+
+	font-size: 4vh;
+	right: 0;
+	padding-left: 10px;
+	position: absolute;
+	top: 50%;
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+
+	border:none;
+    border-top-left-radius: 110px;  /* 100px of height + 10px of border */
+    border-bottom-left-radius: 110px;	
+}
+
 .map {
   width: 100%;
   height: 100vh;
@@ -8,4 +28,10 @@
 .fixed{
   width: 50%;
   position: fixed;
+}
+@media only screen and (max-width: 1000px){
+	.fixed{
+	  width: 0%;
+	  position: fixed;
+	}	
 }

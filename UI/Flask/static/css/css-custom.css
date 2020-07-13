@@ -6,23 +6,43 @@ table{
   margin-left: 15px !important;
 }
 
-.save {
+
+
+.t-button {
+  position: relative;
+  border:10px;
   padding-left: 1em;
   padding-right:1em;
   padding: 0.5em; 
   text-decoration: none;
   background-color: 8px 8px 5px rgb(232, 232, 232) ;
   color: gray; 
-  border-radius: 5px; 
+  border-radius: 10px; 
   box-shadow: none !important;
   border:hidden;
   max-width:250px; 
+  margin-top:10px;  
+  border: 3px solid white;
 }
-.expand{
 
-  text-align: left;
-  background-color: red !important;
-  border:none;
+.hidden{
+  opacity: 0;
+  visibility: hidden;
+}
+
+.appear{
+ opacity: 1;
+ display: none;
+ visibility: hidden;
+ position: absolute;
+
+ transition: opacity 0.2s; 
+ -webkit-transition: visibility 0.2s linear,
+ opacity 0.2s linear;
+ -moz-transition: visibility 0.2s linear,
+ opacity 0.2s linear;
+ -o-transition: visibility 0.2s linear,
+ opacity 0.2s linear; 
 }
 
 .message{ padding-left: 1em;padding-right:1em;padding: 0.5em; text-decoration: none; color: #2B2B2B;
@@ -38,19 +58,29 @@ tbody tr {
   border-bottom: 5px grey ; 
   border-radius: 30px;
   padding-bottom: 1em;   
+
+
 }
 
 tbody tr:hover {
-  transform: scale(1.02); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  transform: scale(1.015); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
   z-index: 1000 !important;
-  background-color:rgb(245, 247, 250) !important;
+  background-color:rgb(250, 250, 250) !important;
   color:black;
   border-radius: 15px;
   box-shadow: 8px 8px 5px rgb(232, 232, 232);
-}tbody tr:hover .save{
+}tbody tr:hover .t-button{
+  border: 3px solid transparent;
   background-color: #fff3d1;
   color: #ffa70f; 
+}tbody tr:hover .t-button:hover{  
+  border: 3px solid #ffa70f;
+
 }
+
+
+
+
 
 .dataTables_wrapper label{
   display:grid !important;
@@ -257,16 +287,43 @@ main{
 /*EXPAND*/
 tr.clickable-row {
   cursor: pointer;
+-webkit-transition: all 0.1s ease-in-out;
+-moz-transition: all 0.1s ease-in-out;
+-o-transition: all 0.1s ease-in-out;
+-ms-transition: all 0.1s ease-in-out;
+transition: all 0.1s ease-in-out;  
 }
 
 tr.clickable-row td {
-  -webkit-transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s ease-in-out;
-  -o-transition: all 0.5s ease-in-out;
-  -ms-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+}
+tr.clickable-row td {
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 
 tr.clickable-row:hover td {
   border-color: #F8F8F8;
+}
+.expand{
+  transform: scale(1.015); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  z-index: 1000 !important;
+  background-color:rgb(245, 247, 250) !important;
+  color:black;
+  border-radius: 15px;
+  box-shadow: 8px 8px 5px rgb(232, 232, 232);  
+  height: 150px;
+  -webkit-transition: all 0.1 s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+
 }

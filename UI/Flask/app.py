@@ -84,16 +84,7 @@ import random
 
 
 CONFIG = {
-  "type": "service_account",
-  "project_id": "colabotz",
-  "private_key_id": "3461529aefd7ff360894869e67129e0b8b400e27",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDWUBxirQqRH3dL\nSB9P7z8I1yKDnXy+o7EfrLrbheKI2KAWGAtJM4RrORQg3TwPxtKdg9Xtt3QsaHmw\nxD3Fg3wr56lW6LcaGn24XXGT2TF1qYRYJIezHdYZfEhs+Ykxn2LvPb2PKFxeS3Gl\n/Zdm3xn9ywU5UpRviV1wg5L7CUrproR+kXLJe1v6WinVU6B4fyV/Ysh5TDoQGWeC\nDTGceMiwICP+PIuQDcF+8mTGY0+R9Jk6+zSJo7odCGicjdJQR8nbUYyBYbPB5u67\n144FuTsj+z+pnWVDwa84P/+mBcWFwsT1WLUN4OQFU7bhTo1QMslrXbPR+qnH3n4A\nKRWQshOpAgMBAAECggEAFo4DUsI94rSSUD60puu5sVM862ebbY/aMAh0eO5//yF3\nRaP9qhRNKyCsdOH7tHhbCZ9KmDROum67YeZhTuRt4MwGdyJSROHFWe4hqir5SNYQ\nmtsrWec5tWBuWeOwM+P/nEid5s9bW0Qq34qPENFJkbt4XwZJH2zwQ8thIGDjvLCD\nBDygWUzMOpohM2HCmEV/yn8AHcsB5jC1GxGjio5YV5n2sFohSBc+M+YI3pDvuckt\nRHfmkWZq+p/q0ontfqubYwuK0GKiqcOIgvwjtiIoiSba/mlp5Yab4krQ4HeclIVc\n9G/jSJNkR5wmmKRs+S1LnEW+LjIi0y7Z65HdwiVuAQKBgQD94l+gak6ed6O7FUji\nAcu2miN+4bMKm0l90Q+iCe1M3LOQ5RJv+Izj8qiEGa0bYdXOfFA65PYSAjwaF49Y\nMkr8uf4CvXNFYLUtTlXbf5wMmS5w5o1a6Yo8ZabmFWY9ECHswo6PPghzscjSF+xG\nNxtCKOxkF8Xh+BxjW2ojKjrcqQKBgQDYGVFD7CCmCc1slnRlcG8eUPm++t7WDfMn\nLGb1JKEbkR+HcPz871QqpHhklQBs7jI4aJuNUVDXu4ZHlJU2z/5D5+HdmFcY4Hor\nHZb56ocMswA+0LTQ2jF1JWWfZUWW380phwpCAMbXfamsiQ+F1HaZqEuHYqygymEM\n8PjWBkDfAQKBgQCjpD/C5AKcvby5H3UEx+eIYT2z0MJYedMa15/d78wWmMLdB+mk\nZm5ZltTroKklVyA6oYINE/tPjEU1BC6OyIvw7ek91uLvuu/MrgtFGbF5pVp7xv8h\ntBo358V11CE8BqP3OUguJ+vGtrccQ/M1JtvY/wuvUGtpxUR2/jshQ10BUQKBgQCM\nx9mYXVFbuhEZB99mYlwRrQE2+OqJGudogtXEKIvIkL+wldxKz4POj/1a0XNIg9k1\nxHhqFSqMkL9HDLY00kW8aWlM2r0LGNqeEhXUVISMsmSbh430beFAhw9wSyKNytk2\nj6IQI79mjZgnLdduAV8OdYRW++KokY+uRaJmlAZZAQKBgE4d+HMcbuwCLEkS53rY\nm+/rCNgs25XookOuJHAx27oO7yfvjlITvYndtO637veN1jR6gkcBsOfGOkuaRCVP\nUaz9o2yrFNO8N7vh446TBgPCZqfw8PhVR+rTfwsUUyKribSHm7vTIv94JZ9I88zg\nGoZ1zn40uonD6oaNaRUfttVv\n-----END PRIVATE KEY-----\n",
-  "client_email": "firebase-adminsdk-gijze@colabotz.iam.gserviceaccount.com",
-  "client_id": "103189305675584478048",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://oauth2.googleapis.com/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-gijze%40colabotz.iam.gserviceaccount.com"
+
 }
 
 
@@ -146,10 +137,10 @@ users_coll = db.collection(u"users")
 
 
 #Twitter API
-CON_KEY = "CkulBfQE91jOJBNIuMb1TUbWt"
-CON_KEY_SECRET = "aWAm88ju62F7CnK8s7fS5r8eDj6mXGEWnhSMKP5aMJiz5WGVfs"
-ACC_TOKEN = "2796790086-9ffNbN5qpRrMd3B6eSKx0dBQhgHk7kEjDLqRAA1"
-ACC_TOKEN_SECRET = "wYQzqIaMgSXICG5Zh7FDE3EBgW5R45paax763eTfyxt9E"
+CON_KEY = ""
+CON_KEY_SECRET = ""
+ACC_TOKEN = ""
+ACC_TOKEN_SECRET = ""
 # Validate the Credentials
 Auth = OAuthHandler(CON_KEY, CON_KEY_SECRET)
 # Validate the Acces Tokens

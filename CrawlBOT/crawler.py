@@ -15,20 +15,16 @@ from urllib3.exceptions import ProtocolError
 #Conexión a la BD.
 import pyrebase
 config = {
-  "apiKey": "AIzaSyDVpxOSaZH08jzKvQJhssW06sloEHz5voc",
-  "authDomain": "colabotz.firebaseapp.com",
-  "databaseURL": "https://colabotz.firebaseio.com",
-  "storageBucket": "colabotz.appspot.com",
-  "serviceAccount": "keyfile.json"
+
 }
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 
 
-CON_KEY = "CkulBfQE91jOJBNIuMb1TUbWt"
-CON_KEY_SECRET = "aWAm88ju62F7CnK8s7fS5r8eDj6mXGEWnhSMKP5aMJiz5WGVfs"
-ACC_TOKEN = "2796790086-9ffNbN5qpRrMd3B6eSKx0dBQhgHk7kEjDLqRAA1"
-ACC_TOKEN_SECRET = "wYQzqIaMgSXICG5Zh7FDE3EBgW5R45paax763eTfyxt9E"
+CON_KEY = ""
+CON_KEY_SECRET = ""
+ACC_TOKEN = ""
+ACC_TOKEN_SECRET = ""
 
 
 #CLASE TWEET
